@@ -1,4 +1,4 @@
-import { createBananaManager } from '../src/bananaManager';
+import { createBananaManager } from '../src/bananaManager.js';
 
 describe('BananaManager', () => {
     let bananaManager;
@@ -61,14 +61,17 @@ describe('BananaManager', () => {
             bananaManager.addBanana(banana1);
             bananaManager.addBanana(banana2);
 
-            const bananas = bananaManager.getAllBananas();
-            const id = bananas[0].id;
+            let bananasBefore = bananaManager.getAllBananas();
+            console.log('До удаления:', bananasBefore);
 
-            bananaManager.removeBanana(id);
-            const remainingBananas = bananaManager.getAllBananas();
+            const idToRemove = bananasBefore[0].id;
+            bananaManager.removeBanana(idToRemove);
 
-            expect(remainingBananas.length).toBe(1);
-            expect(remainingBananas[0].id).not.toBe(id);
+            let bananasAfter = bananaManager.getAllBananas();
+            console.log('После удаления:', bananasAfter);
+
+            expect(bananasAfter.length).toBe(bananasBefore.length - 1);
+            expect(bananasAfter.some(b => b.id === idToRemove)).toBe(false);
         });
 
         test('ничего не делает, если ID не найден', () => {
