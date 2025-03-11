@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     collectCoverage: true,
     collectCoverageFrom: ['src/**/*.js'],
     coverageThreshold: {
@@ -11,4 +11,8 @@ module.exports = {
     },
     testEnvironment: 'node',
     testMatch: ['**/tests/**/*.test.js'],
+    transform: {},
+    moduleNameMapper: {
+        '^(\\.{1,2}/.*)\\.js$': '$1'
+    }
 };
